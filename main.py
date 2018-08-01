@@ -55,9 +55,6 @@ def get_data(json):
 
 
 if __name__ == "__main__":
-    print('*'*20, 'begin', '*'*20, '\n')
-    print('author: Chris\n')
-    print('*'*47)
     while True:
         json = get_html()
         results = get_data(json)
@@ -86,4 +83,4 @@ if __name__ == "__main__":
                 result["releaseInfo"][:8],
                 "\n", sep=""
             )
-        time.sleep(4)
+        time.sleep(5)

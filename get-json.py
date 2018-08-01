@@ -18,8 +18,9 @@ def get_html():
     try:
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
-            html = response.json()
-            result = json.dumps(html, indent=4)
+            html = response.text
+            json_loads = json.loads(html)
+            result = json.dumps(json_loads, indent=4)
             return result
     except requests.ConnectionError as e:
         print(e)
@@ -44,8 +45,4 @@ def main():
 
 
 if __name__ == "__main__":
-    print('*'*20, 'begin', '*'*20, '\n')
-    print('author: Chris\n')
-    print('*'*47)
     main()
-    print('*'*21, 'end', '*'*21, '\n')
