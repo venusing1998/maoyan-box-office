@@ -16,7 +16,8 @@ def get_html():
     try:
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
-            return response.json()
+            result = response.json()
+            return result
     except requests.ConnectionError as e:
         print(e)
 
@@ -30,31 +31,31 @@ def get_data(json):
         list = data.get("list")
         if list:
             for item in list:
-                box_office = {}
+                contents = {}
                 # 场均上座率
-                box_office["avgSeatView"] = item.get("avgSeatView")
+                contents["avgSeatView"] = item.get("avgSeatView")
                 # 场均人次
-                box_office["avgShowView"] = item.get("avgShowView")
+                contents["avgShowView"] = item.get("avgShowView")
                 # 平均票价
-                box_office["avgViewBox"] = item.get("avgViewBox")
+                contents["avgViewBox"] = item.get("avgViewBox")
                 # 票房
-                box_office["boxInfo"] = item.get("boxInfo")
+                contents["boxInfo"] = item.get("boxInfo")
                 # 票房占比
-                box_office["boxRate"] = item.get("boxRate")
+                contents["boxRate"] = item.get("boxRate")
                 # 电影名称
-                box_office["movieName"] = item.get("movieName")
+                contents["movieName"] = item.get("movieName")
                 # 上映天数
-                box_office["releaseInfo"] = item.get("releaseInfo")
+                contents["releaseInfo"] = item.get("releaseInfo")
                 # 排片场次
-                box_office["showInfo"] = item.get("showInfo")
+                contents["showInfo"] = item.get("showInfo")
                 # 排片占比
-                box_office["showRate"] = item.get("showRate")
+                contents["showRate"] = item.get("showRate")
                 # 总票房
-                box_office["sumBoxInfo"] = item.get("sumBoxInfo")
-                yield box_office
+                contents["sumBoxInfo"] = item.get("sumBoxInfo")
+                yield contents
 
 
-if __name__ == "__main__":
+def main():
     while True:
         json = get_html()
         results = get_data(json)
@@ -84,3 +85,7 @@ if __name__ == "__main__":
                 "\n", sep=""
             )
         time.sleep(5)
+
+
+if __name__ == "__main__":
+    main()

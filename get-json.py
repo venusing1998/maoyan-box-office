@@ -18,11 +18,9 @@ def get_html():
     try:
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
-            html = response.text
-            json_loads = json.loads(html)
-            result = json.dumps(json_loads, indent=4)
+            result = json.dumps(response.json(), indent=4, ensure_ascii=False)
             return result
-    except requests.ConnectionError as e:
+    except requests.ConnectionError:
         print(e)
 
 
