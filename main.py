@@ -20,6 +20,7 @@ def get_html():
             return result
     except requests.ConnectionError as e:
         print(e)
+        return None
 
 
 def get_data(json):
