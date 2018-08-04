@@ -22,6 +22,7 @@ def get_html():
             return result
     except requests.ConnectionError:
         print(e)
+        return None
 
 
 def write_into_file(result):
